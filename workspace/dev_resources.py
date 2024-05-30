@@ -38,6 +38,7 @@ container_env = {
     # Get credentials from the local environment
     "OPENAI_API_KEY": getenv("OPENAI_API_KEY"),
     "EXA_API_KEY": getenv("EXA_API_KEY"),
+    "PHI_API_KEY": getenv("PHI_API_KEY"),
     # Database configuration
     "DB_HOST": dev_db.get_db_host(),
     "DB_PORT": dev_db.get_db_port(),

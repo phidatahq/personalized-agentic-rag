@@ -175,6 +175,7 @@ container_env = {
     # Get credentials from the local environment
     "OPENAI_API_KEY": getenv("OPENAI_API_KEY"),
     "EXA_API_KEY": getenv("EXA_API_KEY"),
+    "PHI_API_KEY": getenv("PHI_API_KEY"),
     # Database configuration
     "DB_HOST": AwsReference(prd_db.get_db_endpoint),
     "DB_PORT": AwsReference(prd_db.get_db_port),
