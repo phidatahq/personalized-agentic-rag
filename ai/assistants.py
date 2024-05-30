@@ -2,18 +2,23 @@ from textwrap import dedent
 from typing import Optional, List
 
 from phi.assistant import Assistant
+from phi.assistant.python import PythonAssistant
+from phi.embedder.openai import OpenAIEmbedder
+from phi.knowledge import AssistantKnowledge
+from phi.llm.openai import OpenAIChat
+from phi.memory import AssistantMemory
+from phi.memory.db.postgres import PgMemoryDb
+from phi.storage.assistant.postgres import PgAssistantStorage
 from phi.tools import Toolkit
-from phi.tools.exa import ExaTools
 from phi.tools.calculator import Calculator
 from phi.tools.duckduckgo import DuckDuckGo
-from phi.tools.yfinance import YFinanceTools
+from phi.tools.exa import ExaTools
 from phi.tools.file import FileTools
-from phi.llm.openai import OpenAIChat
-from phi.assistant.python import PythonAssistant
+from phi.tools.yfinance import YFinanceTools
+from phi.vectordb.pgvector import PgVector2
 
 from ai.settings import ai_settings
-from ai.storage import assistant_storage, assistant_memory
-from ai.knowledge import assistant_knowledge
+from db.session import db_url
 from workspace.settings import ws_settings
 
 
@@ -146,11 +151,19 @@ def get_personalized_assistant(
         # Update memory after each run
         update_memory_after_run=True,
         # Store the memories in a database
-        memory=assistant_memory,
+        memory=AssistantMemory(db=PgMemoryDb(table_name="personalized_assistant_memory", db_url=db_url)),
         # Store runs in a database
-        storage=assistant_storage,
+        storage=PgAssistantStorage(table_name="personalized_assistant_storage", db_url=db_url),
         # Store knowledge in a vector database
-        knowledge_base=assistant_knowledge,
+        knowledge_base=AssistantKnowledge(
+            vector_db=PgVector2(
+                db_url=db_url,
+                collection="personalized_assistant_documents",
+                embedder=OpenAIEmbedder(model=ai_settings.embedding_model, dimensions=1536),
+            ),
+            # 3 references are added to the prompt
+            num_documents=3,
+        ),
         description=dedent(
             """\
         You are the most advanced AI system in the world called `Optimus v7`.

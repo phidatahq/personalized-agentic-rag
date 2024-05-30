@@ -27,6 +27,17 @@ with st.expander(":rainbow[:point_down: How to use]"):
     st.markdown("- Always respond with a nice greeting and salutation")
 
 
+def restart_assistant():
+    logger.debug("---*--- Restarting Assistant ---*---")
+    st.session_state["personalized_assistant"] = None
+    st.session_state["personalized_assistant_run_id"] = None
+    if "url_scrape_key" in st.session_state:
+        st.session_state["url_scrape_key"] += 1
+    if "file_uploader_key" in st.session_state:
+        st.session_state["file_uploader_key"] += 1
+    st.rerun()
+
+
 def main() -> None:
     # Get username
     user_id = get_username_sidebar()
@@ -145,7 +156,7 @@ def main() -> None:
 
     # Create assistant run (i.e. log to database) and save run_id in session state
     try:
-        st.session_state["assistant_run_id"] = personalized_assistant.create_run()
+        st.session_state["personalized_assistant_run_id"] = personalized_assistant.create_run()
     except Exception:
         st.warning("Could not create assistant, is the database running?")
         return
@@ -157,9 +168,7 @@ def main() -> None:
         st.session_state["messages"] = assistant_chat_history
     else:
         logger.debug("No chat history found")
-        st.session_state["messages"] = [
-            {"role": "assistant", "content": "Upload a doc and ask me questions..."}
-        ]
+        st.session_state["messages"] = [{"role": "assistant", "content": "Ask me anything..."}]
 
     # Prompt for user input
     if prompt := st.chat_input():
@@ -235,7 +244,7 @@ def main() -> None:
     if personalized_assistant.storage:
         assistant_run_ids: List[str] = personalized_assistant.storage.get_all_run_ids(user_id=user_id)
         new_assistant_run_id = st.sidebar.selectbox("Run ID", options=assistant_run_ids)
-        if st.session_state["assistant_run_id"] != new_assistant_run_id:
+        if st.session_state["personalized_assistant_run_id"] != new_assistant_run_id:
             logger.info(f"---*--- Loading run: {new_assistant_run_id} ---*---")
             st.session_state["personalized_assistant"] = get_personalized_assistant(
                 user_id=user_id,
@@ -271,17 +280,6 @@ def main() -> None:
 
     if st.sidebar.button("New Run"):
         restart_assistant()
-
-
-def restart_assistant():
-    logger.debug("---*--- Restarting Assistant ---*---")
-    st.session_state["personalized_assistant"] = None
-    st.session_state["assistant_run_id"] = None
-    if "url_scrape_key" in st.session_state:
-        st.session_state["url_scrape_key"] += 1
-    if "file_uploader_key" in st.session_state:
-        st.session_state["file_uploader_key"] += 1
-    st.rerun()
 
 
 if check_password():
