@@ -99,7 +99,7 @@ def get_personalized_assistant(
             description="You are a Senior New York Times researcher tasked with writing a cover story research report.",
             instructions=[
                 "For a given topic, use the `search_exa` to get the top 10 search results.",
-                "Carefully read the results and generate a final - NYT cover story worthy report in the <report_format> provided below.",
+                "Carefully read the results and generate a final - NYT cover story worthy report in the format provided below.",
                 "Make your report engaging, informative, and well-structured.",
                 "Remember: you are writing for the New York Times, so the quality of the report is important.",
             ],
@@ -132,7 +132,9 @@ def get_personalized_assistant(
             tools=[ExaTools(num_results=5, text_length_limit=1000)],
             # This setting tells the LLM to format messages in markdown
             markdown=True,
+            show_tool_calls=False,
             add_datetime_to_instructions=True,
+            save_output_to_file="scratch/{run_id}.md",
             debug_mode=debug_mode,
         )
         team.append(_research_assistant)
