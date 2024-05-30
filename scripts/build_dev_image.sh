@@ -6,7 +6,7 @@ CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WS_ROOT="$(dirname ${CURR_DIR})"
 DOCKERFILE="Dockerfile"
 REPO="repo"
-NAME="agentic-rag-app"
+NAME="personalized-agentic-rag"
 TAG="dev"
 
 # Run docker buildx create --use before running this script

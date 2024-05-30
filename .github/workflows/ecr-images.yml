@@ -41,4 +41,4 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.ECR_REPO }}/agentic-rag-app:dev, ${{ env.ECR_REPO }}/agentic-rag-app:prd
+          tags: ${{ env.ECR_REPO }}/personalized-agentic-rag:dev, ${{ env.ECR_REPO }}/personalized-agentic-rag:prd

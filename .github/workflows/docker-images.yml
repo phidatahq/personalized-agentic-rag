@@ -30,4 +30,4 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_REPO }}/agentic-rag-app:dev, ${{ secrets.DOCKERHUB_REPO }}/agentic-rag-app:prd
+          tags: ${{ secrets.DOCKERHUB_REPO }}/personalized-agentic-rag:dev, ${{ secrets.DOCKERHUB_REPO }}/personalized-agentic-rag:prd
