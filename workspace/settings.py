@@ -21,7 +21,7 @@ ws_settings = WorkspaceSettings(
     prd_env="prd",
     # -*- Production Apps
     prd_app_enabled=True,
-    # prd_api_enabled=True,
+    prd_api_enabled=True,
     prd_db_enabled=True,
     # -*- AWS settings
     # Region for AWS resources
