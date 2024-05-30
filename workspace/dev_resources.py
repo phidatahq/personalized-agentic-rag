@@ -18,7 +18,7 @@ dev_image = DockerImage(
     tag=ws_settings.dev_env,
     enabled=ws_settings.build_images,
     path=str(ws_settings.ws_root),
-    push_image=False,
+    push_image=ws_settings.push_images,
 )
 
 # -*- Dev database running on port 5432:5432

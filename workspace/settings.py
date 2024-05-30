@@ -33,9 +33,11 @@ ws_settings = WorkspaceSettings(
     # subnet_ids=["subnet-xyz", "subnet-xyz"],
     # -*- Image Settings
     # Name of the image
-    image_name="agentic-rag-app",
+    image_name="personalized-agentic-rag",
     # Repository for the image
     # image_repo="phidata",
     # Build images locally
     # build_images=True,
+    # Push images after building
+    # push_images: bool = False
 )

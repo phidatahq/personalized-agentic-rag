@@ -31,7 +31,7 @@ prd_image = DockerImage(
     enabled=ws_settings.build_images,
     path=str(ws_settings.ws_root),
     platforms=["linux/amd64", "linux/arm64"],
-    push_image=True,
+    push_image=ws_settings.push_images,
 )
 
 # -*- S3 bucket for production data (set enabled=True when needed)
