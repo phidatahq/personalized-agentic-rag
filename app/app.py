@@ -105,25 +105,9 @@ def main() -> None:
     # Sidebar checkboxes for selecting team members
     st.sidebar.markdown("### Select Team Members")
 
-    # Enable Python Assistant
-    if "python_assistant_enabled" not in st.session_state:
-        st.session_state["python_assistant_enabled"] = False
-    # Get python_assistant_enabled from session state if set
-    python_assistant_enabled = st.session_state["python_assistant_enabled"]
-    # Checkbox for enabling web search
-    python_assistant = st.sidebar.checkbox(
-        "Python Assistant",
-        value=python_assistant_enabled,
-        help="Enable the Python Assistant for writing and running python code.",
-    )
-    if python_assistant_enabled != python_assistant:
-        st.session_state["python_assistant_enabled"] = python_assistant
-        python_assistant_enabled = python_assistant
-        restart_assistant()
-
     # Enable Research Assistant
     if "research_assistant_enabled" not in st.session_state:
-        st.session_state["research_assistant_enabled"] = False
+        st.session_state["research_assistant_enabled"] = True
     # Get research_assistant_enabled from session state if set
     research_assistant_enabled = st.session_state["research_assistant_enabled"]
     # Checkbox for enabling web search
@@ -147,7 +131,6 @@ def main() -> None:
             ddg_search=ddg_search_enabled,
             file_tools=file_tools_enabled,
             finance_tools=finance_tools_enabled,
-            python_assistant=python_assistant_enabled,
             research_assistant=research_assistant_enabled,
         )
         st.session_state["personalized_assistant"] = personalized_assistant
@@ -253,7 +236,7 @@ def main() -> None:
                 ddg_search=ddg_search_enabled,
                 file_tools=file_tools_enabled,
                 finance_tools=finance_tools_enabled,
-                python_assistant=python_assistant_enabled,
+
                 research_assistant=research_assistant_enabled,
             )
             st.rerun()
