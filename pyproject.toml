@@ -1,5 +1,5 @@
 [project]
-name = "ai-app"
+name = "agentic-rag"
 version = "0.1.0"
 requires-python = ">=3.7"
 readme = "README.md"

@@ -32,7 +32,7 @@ ws_settings = WorkspaceSettings(
     # Subnet IDs in the aws_region
     # subnet_ids=["subnet-xyz", "subnet-xyz"],
     # -*- Image Settings
-    # Name of the image
+    # Name of the image to build/push/use
     image_name="personalized-agentic-rag",
     # Repository for the image
     # image_repo="phidata",

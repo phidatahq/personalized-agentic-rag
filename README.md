@@ -1,6 +1,6 @@
 ## Personalized Agentic RAG
 
-This repo contains the code for running a Personalized Agentic RAG in 2 environments:
+This repo contains the code for running the Personalized Agentic RAG in `dev` and `prd`:
 
 1. `dev`: A development environment running locally on docker
 2. `prd`: A production environment running on AWS ECS
@@ -21,7 +21,7 @@ source aienv/bin/activate
 3. Install `phidata`:
 
 ```sh
-pip install phidata
+pip install 'phidata[aws]'
 ```
 
 4. Setup workspace:
@@ -42,7 +42,7 @@ cp -r workspace/example_secrets workspace/secrets
 cp example.env .env
 ```
 
-## Run App locally
+## Run Agentic RAG locally
 
 1. Install [docker desktop](https://www.docker.com/products/docker-desktop)
 
@@ -60,7 +60,7 @@ export OPENAI_API_KEY=sk-***
 export EXA_API_KEY=xxx
 ```
 
-**OR** set in the `.env` file
+**OR** set them in the `.env` file
 
 3. Start the workspace using:
 
