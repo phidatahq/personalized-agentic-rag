@@ -26,7 +26,16 @@ def get_assistant(
     """Return the assistant"""
 
     if assistant_type == "AGENTIC_RAG":
-        return get_personalized_assistant(run_id=run_id, user_id=user_id)
+        return get_personalized_assistant(
+            calculator=True,
+            ddg_search=True,
+            file_tools=True,
+            finance_tools=True,
+            python_assistant=True,
+            research_assistant=True,
+            run_id=run_id,
+            user_id=user_id
+        )
 
 
 class LoadKnowledgeBaseRequest(BaseModel):
